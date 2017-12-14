@@ -131,7 +131,7 @@
 												  <th scope="col">Away team</th>
 												</tr>
 											  </thead>
-											  <tbody>
+											  <tbody class="odds">
 												<tr>
 												  <td>Juventus</td>
 												  <td>33.37% - 30.23% &nbsp;&nbsp;&nbsp;<a href="#ods1" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample"> See why</a>
@@ -143,16 +143,6 @@
 												  </td>
 												  <td>AC Milan</td>
 												  
-												</tr>
-												<tr>
-												  <td>Inter</td>
-												  <td>40.37% - 28.23%  &nbsp;&nbsp;&nbsp;<a href="!#">See why</a></td>
-												  <td>Cayen</td>
-												</tr>
-												<tr>
-												  <td>Juventus</td>
-												  <td>33.37% - 30.23%  &nbsp;&nbsp;&nbsp;<a href="!#">See why</a></td>
-												  <td>AC Milan</td>
 												</tr>
 											  </tbody>
 											</table>
@@ -297,7 +287,7 @@
 			</div>
 
 		<!-- Scripts -->
-			<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+			<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" "></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
@@ -306,11 +296,28 @@
 			<script src="assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
+			<script src="assets/js/bind.min.js"></script>
 			
 			<script>
 				$('#tableTab a').on('click', function (e) {
 				  e.preventDefault()
 				  $(this).tab('show')
+				})
+				//request to fetch predictions
+				fetch('https://us-central1-sportod-c9d37.cloudfunctions.net/odds', { mode : 'cors'})
+					.then( (response) => {
+					//bind here
+					binder = bind({
+						predictions : response.json()
+					}, 
+					{
+						predictions : {
+							'dom' : '.odds',
+							'transform': function(item){
+									return  "<tr><td>"+item.HomeTeam+"</td><td></td><td>"+item.AwayTeam+"</td></tr>"
+							}
+						}
+					})
 				})
 			</script>
 
