@@ -53,9 +53,10 @@
 									</header><br/>
 									<div class="content">
 										<ul class="nav nav-tabs nav-fill" id="tableTab">
+										  <!--
 										  <li class="nav-item">
 											<a class="nav-link active" href="#standings">Standings</a>
-										  </li>
+										  </li> -->
 										  <li class="nav-item">
 											<a class="nav-link" href="#live">Live Games</a>
 										  </li>
@@ -105,18 +106,13 @@
 											
 											<div class="card text-center">
 												<div class="card-header">
-												UEFA Chamions League
+												Live scores is powered by <a href="http://www.livescore.in/" title="Livescore.in">Livescore.in</a>
 											  </div>
 											  <div class="card-body">
-												<p class="card-text text-justify">
-													<span>
-														<b><h2><img class="img-thumbnail" width="100" height="150" src="images/logo.png" />&nbsp;&nbsp;Juventus &nbsp;&nbsp; 0  -  0 &nbsp;&nbsp;Read Madrid &nbsp;&nbsp;<img class="img-thumbnail" src="images/logo.png" width="100" height="150"/></h2></b>
-														<hr/>
-														<b><h2><img class="img-thumbnail" src="images/logo.png" width="100" height="150"/>&nbsp;&nbsp; Barcelona &nbsp;&nbsp; 0  -  0 &nbsp;&nbsp;Atl. Madrid &nbsp;&nbsp;<img class="img-thumbnail" src="images/logo.png" width="100" height="150"/></h2></b>
-														<hr/>
-														<b><h2><img class="img-thumbnail" src="images/logo.png" width="100" height="150"/>&nbsp;&nbsp; Man United. &nbsp;&nbsp; 0  -  0 &nbsp;&nbsp;PSG &nbsp;&nbsp;<img class="img-thumbnail" src="images/logo.png" width="100" height="150"/></h2></b>
-													</span>
-												</p>
+												<iframe id="inscore-xdc-504633" src="https://www.livescore.in/free/504633/" width="624" height="500" frameborder="0" scrolling="no"></iframe>
+
+<script type="text/javascript">/*<![CDATA[*/try{function inscore_504633_xdc(){this.elm = null;this.hash = null;var times_resized = 0;var times_not_resized = 0;this.resize = function(){times_resized == 1023 && (times_resized = 0);times_not_resized == 1023 && (times_not_resized = 0);if(this.getElm() && location.hash && location.hash != this.hash){this.hash = location.hash;var reggg = new RegExp(".*inscore_ifheight_xdc_([0-9]{2,5}).*");if(result=reggg.exec(location.hash)){this.getElm().style.height = (typeof result[1] == "undefined" ? "10000":(result[1] > 500 && result[1] <= 30000 ? parseInt(result[1]):500)) + "px";times_resized ++;}} else if(location.hash && location.hash == this.hash) times_not_resized ++;else return resize_later(75);resize_later(250);};var resize_later = function(time){setTimeout(function(){ inscore_504633_xdc_run.resize(); }, time);};this.getElm = function(){try {(typeof this.elm == "undefined" || this.elm === null || !this.elm) && (this.elm = document.getElementById("inscore-xdc-504633"));} catch(e) { this.elm = null; }return this.elm;};var show_links = function(){if((times_resized >= 1 || times_not_resized >= 2) && (obj = document.getElementById("freescore_links_504633"))){obj.style.visibility = "visible";obj.style.display = "block";} else show_links_later();};var show_links_later = function() { setTimeout(function(){ show_links(); }, 100); };if (typeof window.postMessage == "undefined"){show_links_later();resize_later();}else{var ev = function(event){try{var data = JSON.parse(event.data);}catch (e){return;}if (data instanceof Array && data[0] == 504633 && typeof data[1] != "undefined"){eval(data[1]);}};if (window.addEventListener){window.addEventListener( "message", ev);}else if ( window.attachEvent ) {window.attachEvent("onmessage", ev);}setTimeout(function(){ document.getElementById("inscore-xdc-504633").contentWindow.postMessage(JSON.stringify(["504633", "run"]), "*"); }, 2000);show_links_later();resize_later();}};var inscore_504633_xdc_run = new inscore_504633_xdc();}catch(e){document.getElementById("inscore-xdc-504633").style.height = "10000px";}
+/*]]>*/</script>
 											  </div>
 											</div>
 											
@@ -127,8 +123,9 @@
 											  <thead>
 												<tr class="table-dark">
 												  <th scope="col">Home Team</th>
-												  <th scope="col">Odds</th>
+												  <th scope="col">VS</th>
 												  <th scope="col">Away team</th>
+												  <th scope="col"> Draws</th>
 												</tr>
 											  </thead>
 											  <tbody class="odds">
@@ -287,7 +284,8 @@
 			</div>
 
 		<!-- Scripts -->
-			<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" "></script>
+			<script src="assets/js/jquery.min.js"></script>
+			<!-- <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" "></script> -->
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
@@ -304,20 +302,31 @@
 				  $(this).tab('show')
 				})
 				//request to fetch predictions
-				fetch('https://us-central1-sportod-c9d37.cloudfunctions.net/odds', { mode : 'cors'})
-					.then( (response) => {
-					//bind here
-					binder = bind({
-						predictions : response.json()
-					}, 
-					{
-						predictions : {
-							'dom' : '.odds',
-							'transform': function(item){
-									return  "<tr><td>"+item.HomeTeam+"</td><td></td><td>"+item.AwayTeam+"</td></tr>"
-							}
-						}
-					})
+				$.ajax({
+					url: 'https://sportod-c9d37.firebaseapp.com/odds',
+					dataType : 'json',
+					//mode : 'no-cors',
+					//crossDomain : true,
+					success : (data) => {
+							//bind here
+							binder = Bind({
+								predictions : data
+							}, 
+							{
+								predictions : {
+									'dom' : '.odds',
+									'transform': function(item){
+											return  "<tr><td>"+item.HomeTeam+" (<b>"+item.HomeWin+"</b>)</td><td> VS </td><td>"+item.AwayTeam+" (<b>"+item.AwayWin+"</b>)</td> <td>Draw: <b>"+item.Draw+"</b></td></tr>"
+									}
+								}
+							})
+						},
+					error : (xhr, error, message) => {
+						console.log('Cloud Request', error);
+					}
+				}).done(data => {
+					//
+					console.log(data)
 				})
 			</script>
 
