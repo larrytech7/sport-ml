@@ -9,6 +9,16 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112810447-1"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', 'UA-112810447-1');
+		</script>
+
 	</head>
 	<body>
 
@@ -27,6 +37,7 @@
 										<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
 										<li><a href="#" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
 										<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><div id="google_translate_element"></div></li>
 									</ul>
 								</header>
 
@@ -58,19 +69,19 @@
 											<a class="nav-link active" href="#standings">Standings</a>
 										  </li> -->
 										  <li class="nav-item">
-											<a class="nav-link active" href="#live">Live Games</a>
+											<a class="nav-link " href="#live">Live Games</a>
 										  </li>
 										  <li class="nav-item">
-											<a class="nav-link" href="#odds">Game Odds</a>
+											<a class="nav-link active" href="#odds">Game Odds</a>
 										  </li>
 										  <li class="nav-item">
-											<a class="nav-link" href="#news">Expert Talks</a>
+											<a class="nav-link" href="#news">Expert Views</a>
 										  </li>
 										</ul>
 										<!-- Tab panes -->
 										<div class="tab-content">
 										
-										  <div class="tab-pane active text-center" id="live" role="tabpanel" aria-labelledby="home-tab">
+										  <div class="tab-pane  text-center" id="live" role="tabpanel" aria-labelledby="home-tab">
 											<br/>
 											<div class="card text-center">
 												<div class="card-header">
@@ -86,7 +97,7 @@
 											</div>
 											
 										  </div>
-										  <div class="tab-pane" id="odds" role="tabpanel" aria-labelledby="messages-tab">
+										  <div class="tab-pane active" id="odds" role="tabpanel" aria-labelledby="messages-tab">
 											<br/>
 											<table class="table table-striped table-hover table-responsive-md" id="oddstable" 
 											   data-id-field="home"
@@ -174,6 +185,43 @@
 										  </div>
 										  <div class="tab-pane" id="news" role="tabpanel" aria-labelledby="settings-tab">
 											<br/>
+											<div class="card">
+											  <div class="card-body">
+													<a class="twitter-timeline" href="https://twitter.com/chadmillman?ref_src=twsrc%5Etfw">Tweets by chadmillman</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+											  </div>
+											</div>
+											<br/>
+											<div class="card">
+											  <div class="card-body">
+												<a class="twitter-timeline" href="https://twitter.com/setoo9?ref_src=twsrc%5Etfw">Tweets by setoo9</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+											  </div>
+											</div>
+											<br/>
+											<div class="card">
+											  <div class="card-body">
+												<a class="twitter-timeline" href="https://twitter.com/SuperSportTV?ref_src=twsrc%5Etfw">Tweets by SuperSportTV</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+											  </div>
+											</div>
+                                           <div class="card">
+											  <div class="card-body">
+												<a class="twitter-timeline" href="https://twitter.com/SkySports?ref_src=twsrc%5Etfw">Tweets by SkySports</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+											  </div>
+											</div>
+											<br/>
+
+											<div class="card">
+											  <div class="card-body">
+												<a class="twitter-timeline" href="https://twitter.com/brfootball?ref_src=twsrc%5Etfw">Tweets by brfootball</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+											  </div>
+											</div>
+											<br/>
+                                           
+                                           <div class="card">
+											  <div class="card-body">
+												<a class="twitter-timeline" href="https://twitter.com/ESPNFC?ref_src=twsrc%5Etfw">Tweets by ESPNFC</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+											  </div> 
+											</div>
+											
 											<div class="card">
 											  <div class="card-body">
 												<h4 class="card-title">Eric mathieu sees hope for Arsenal</h4>
@@ -302,7 +350,13 @@
 			<script src="assets/js/bind.min.js"></script>
 			<script src="assets/js/bootstrap-table.js"></script>
 			<script src="assets/js/datatable.js"></script>
-			
+			<script type="text/javascript">
+				function googleTranslateElementInit() {
+				  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+				}
+			</script>
+			<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 			<script>
 				$('#tableTab a').on('click', function (e) {
 				  e.preventDefault()
